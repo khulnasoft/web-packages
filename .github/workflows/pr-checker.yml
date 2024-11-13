@@ -7,8 +7,6 @@ on:
 permissions:
     contents: read
     pull-requests: write
-    paths:
-      - "vue-components/*"
 
 jobs:
     pr-open-check:
@@ -37,24 +35,29 @@ jobs:
 
             - name: Install packages
               run: |
+                  cd vue-components
                   pnpm run setup
 
             - name: Code Format
               id: codeFormat
               run: |
+                  cd vue-components
                   pnpm run format:check
 
             - name: Unit Test
               id: unitTest
               run: |
+                  cd vue-components
                   pnpm run test:unit
 
             - name: Lint
               run: |
+                  cd vue-components
                   pnpm run lint
 
             - name: Security
               run: |
+                  cd vue-components
                   pnpm run security:check
 
             - name: Add Code Format Fail Comment

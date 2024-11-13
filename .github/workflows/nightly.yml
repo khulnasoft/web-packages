@@ -6,8 +6,7 @@ on:
 
 permissions:
   contents: read
-  paths:
-      - "vue-components/*"
+  
 
 jobs:
   nightly:
@@ -36,5 +35,6 @@ jobs:
 
       - name: Build
         run: |
+          cd vue-components
           pnpm run setup
           pnpm run build:lib

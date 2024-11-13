@@ -22,7 +22,7 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  message: 'Thanks a lot for your contribution! But, PR does not seem to be linked to any issues. Please [manually link to an issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#manually-linking-a-pull-request-or-branch-to-an-issue-using-the-issue-sidebar) or mention it in the description using #<issue_id>.'
+                  message: 'Thanks a lot for your contribution! But, PR does not seem to be linked to any issues. Please [manually link to an issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue-using-the-issue-sidebar) or mention it in the description using #<issue_id>.'
 
             - uses: actions/checkout@v4
             - uses: pnpm/action-setup@v4
@@ -35,24 +35,29 @@ jobs:
 
             - name: Install packages
               run: |
-                  pnpm run setup
+                  cd vue-components
+                  pnpm install
 
             - name: Code Format
               id: codeFormat
               run: |
+                  cd vue-components
                   pnpm run format:check
 
             - name: Unit Test
               id: unitTest
               run: |
+                  cd vue-components
                   pnpm run test:unit
 
             - name: Lint
               run: |
+                  cd vue-components
                   pnpm run lint
 
             - name: Security
               run: |
+                  cd vue-components
                   pnpm run security:check
 
             - name: Add Code Format Fail Comment
@@ -60,14 +65,14 @@ jobs:
               uses: thollander/actions-comment-pull-request@v1
               with:
                   message: |
-                      Thanks a lot for your contribution! But, PR does not seem to fit our code format standards. Please run the 'npm run format' command and commit the changes.
+                      Thanks a lot for your contribution! But, PR does not seem to fit our code format standards. Please run the 'pnpm run format' command in the 'vue-components' directory and commit the changes.
 
             - name: Add Unit Test Fail Comment
               if: always() && steps.unitTest.outcome == 'failure'
               uses: thollander/actions-comment-pull-request@v2
               with:
                   message: |
-                      Thanks a lot for your contribution! But, Unit tests failed. You can check the unit tests with the command 'npm run test:unit' and commit the changes.
+                      Thanks a lot for your contribution! But, Unit tests failed. You can check the unit tests with the command 'pnpm run test:unit' in the 'vue-components' directory and commit the changes.
 
             - name: Add Label
               if: ${{ failure() }}

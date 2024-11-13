@@ -4,9 +4,9 @@ on:
   push:
     branches: [master]
     paths:
-      - "vue-components/packages/khulnasoft/src/**/*.d.ts"
-      - "vue-components/packages/khulnasoft/src/**/style/*.js"
-      - "vue-components/packages/themes/src/presets/**/**/index.js"
+      - "packages/khulnasoft/src/**/*.d.ts"
+      - "packages/khulnasoft/src/**/style/*.js"
+      - "packages/themes/src/presets/**/**/index.js"
 
 permissions:
   contents: write

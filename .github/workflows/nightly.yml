@@ -35,6 +35,5 @@ jobs:
 
       - name: Build
         run: |
-          cd vue-components
           pnpm run setup
           pnpm run build:lib

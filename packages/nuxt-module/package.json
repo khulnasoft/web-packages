@@ -86,7 +86,7 @@
         "changelogen": "^0.5.5",
         "nitropack": "^2.6.3",
         "nuxt": "3.19.0",
-        "vitest": "^1.6.0",
+        "vitest": "^0.30.0",
         "@khulnasoft/themes": "workspace:*"
     },
     "engines": {
